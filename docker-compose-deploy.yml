@@ -1,0 +1,57 @@
+version: '3.7'
+services:
+
+  frontend:
+    image: frontend
+    ports:
+      - 3000:3000
+    depends_on:
+      - gateway
+      - user-service
+
+  gateway:
+    image: gateway
+    environment:
+      JWT_SECRET: secret
+      USER_WEB_SERVICE_HOST: http://user-service
+      USER_WEB_SERVICE_PORT: 3000
+
+  user-service:
+    image: user-service
+    environment:
+      PROCESS_TYPE: web
+      DB_HOST: db
+      DB_USER: root
+      DB_PASSWORD: root
+      DB_DATABASE: user
+      DB_PORT: 5432
+
+  db:
+    image: postgres:10.4-alpine
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: user
+
+  migrate_user_data:
+    image: user-service
+    environment:
+      PROCESS_TYPE: script
+      DB_HOST: db
+      DB_USER: root
+      DB_PASSWORD: root
+      DB_DATABASE: user
+      DB_PORT: 5432
+    depends_on:
+      - user-service
+      - db
+    command: >
+      /bin/sh -c "
+        while ! nc -z -w1 db 5432;
+        do
+          echo sleeping;
+          sleep 1;
+        done;
+        echo Connected!;
+        node index.js
+      "
