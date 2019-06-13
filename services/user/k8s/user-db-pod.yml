@@ -1,0 +1,30 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: user-db
+  labels:
+    app: user-db
+spec:
+  containers:
+    - name: user-db
+      image: postgres:10.4-alpine
+      imagePullPolicy: Always
+      ports:
+        - containerPort: 5432
+          name: user-db
+      env:
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: user
+              key: db_user
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: user
+              key: db_password
+        - name: POSTGRES_DB
+          valueFrom:
+            secretKeyRef:
+              name: user
+              key: db_database
