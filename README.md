@@ -129,3 +129,6 @@ $docker-compose -f docker-compose-deploy.yml down
 
 Open url=http://localhost:3002/login in browser
 
+
+## Next ==> [Deploy with Kubernetes on Google Kubernetes Engine (GKE)](https://github.com/up1/demo-docker-k8s/blob/master/K8S_README.md)
+
