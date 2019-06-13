@@ -98,18 +98,19 @@ Call API from Gateway
 
 ## Step 4 :: Building Frontend with Docker
 
+```
+$cd frontend
+$docker image build -t frontend .
+$docker container run --rm -p 3002:3000 frontend
+```
+Open url=http://localhost:3002/login in browser
 
 
 
-## Frone end
+## Step 5 :: Run All-in-one with Docker compose
+```
+$docker-compose up
+```
 
-$cd frontent
-$yarn install
-$yarn start
+Open url=http://localhost:3002/login in browser
 
-http://localhost:3000
-
-
-
-cd services/user
-docker image build -t user .
