@@ -1,5 +1,13 @@
 # Workshop Docker and Kubernetes
 
+## Software requirements
+* [NodeJS](https://nodejs.org/en/)
+* [Docker](https://www.docker.com/)
+* [Docker compose](https://docs.docker.com/compose/)
+* [Postman](https://www.getpostman.com/) and [newman](https://www.npmjs.com/package/newman)
+* [Kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) : Kubernetes manager CLI
+
+
 ## Step 1 :: Building User service with Docker
 
 ```
