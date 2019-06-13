@@ -108,8 +108,23 @@ Open url=http://localhost:3002/login in browser
 
 
 ## Step 5 :: Run All-in-one with Docker compose
+
+Build and deploy
 ```
-$docker-compose up
+$docker-compose -f docker-compose-build.yml build
+$docker-compose -f docker-compose-build.yml up
+
+// Delete all
+$docker-compose -f docker-compose-build.yml down
+
+```
+
+Deploy only
+```
+$docker-compose -f docker-compose-deploy.yml up
+
+// Delete all
+$docker-compose -f docker-compose-deploy.yml down
 ```
 
 Open url=http://localhost:3002/login in browser

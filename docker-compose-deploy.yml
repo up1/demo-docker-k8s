@@ -55,3 +55,44 @@ services:
         echo Connected!;
         node index.js
       "
+
+  # Product service
+  product-service:
+    image: product-service
+    environment:
+      PROCESS_TYPE: web
+      DB_HOST: db-product
+      DB_USER: root
+      DB_PASSWORD: root
+      DB_DATABASE: product
+      DB_PORT: 5432
+
+  db-product:
+    image: postgres:10.4-alpine
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: product
+
+  migrate-product-data:
+    image: product-service
+    environment:
+      PROCESS_TYPE: script
+      DB_HOST: db-product
+      DB_USER: root
+      DB_PASSWORD: root
+      DB_DATABASE: product
+      DB_PORT: 5432
+    depends_on:
+      - product-service
+      - db-product
+    command: >
+      /bin/sh -c "
+        while ! nc -z -w1 db-product 5432;
+        do
+          echo sleeping;
+          sleep 1;
+        done;
+        echo Connected!;
+        node index.js
+      "

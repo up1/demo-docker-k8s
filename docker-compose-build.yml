@@ -17,7 +17,10 @@ services:
       JWT_SECRET: secret
       USER_WEB_SERVICE_HOST: http://user-service
       USER_WEB_SERVICE_PORT: 3000
+      PRODUCT_WEB_SERVICE_HOST: http://product-service
+      PRODUCT_WEB_SERVICE_PORT: 3000
 
+  # User service
   user-service:
     build: ./services/user
     image: user-service
@@ -51,6 +54,48 @@ services:
     command: >
       /bin/sh -c "
         while ! nc -z -w1 db 5432;
+        do
+          echo sleeping;
+          sleep 1;
+        done;
+        echo Connected!;
+        node index.js
+      "
+
+  # Product service
+  product-service:
+    build: ./services/product
+    image: product-service
+    environment:
+      PROCESS_TYPE: web
+      DB_HOST: db-product
+      DB_USER: root
+      DB_PASSWORD: root
+      DB_DATABASE: product
+      DB_PORT: 5432
+
+  db-product:
+    image: postgres:10.4-alpine
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: product
+
+  migrate-product-data:
+    image: product-service
+    environment:
+      PROCESS_TYPE: script
+      DB_HOST: db-product
+      DB_USER: root
+      DB_PASSWORD: root
+      DB_DATABASE: product
+      DB_PORT: 5432
+    depends_on:
+      - product-service
+      - db-product
+    command: >
+      /bin/sh -c "
+        while ! nc -z -w1 db-product 5432;
         do
           echo sleeping;
           sleep 1;
