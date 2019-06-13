@@ -45,6 +45,9 @@ $kubectl create -f services/user/k8s
 ## Step 3 :: Deploy product service in cluster
 ```
 $kubectl create -f services/user/k8s
+
+// Migrate data
+$sh ./scripts/migrate-data.sh
 ```
 
 ## Step 4 :: Deploy gateway in cluster

@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: product-db
+spec:
+  ports:
+    - port: 3306
+      name: product-db
+  clusterIP: None
+  selector:
+    app: product-db
