@@ -1,0 +1,33 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  labels:
+    app: gateway
+  name: gateway
+spec:
+  selector:
+    matchLabels:
+      app: gateway
+  template:
+    metadata:
+      labels:
+        app: gateway
+    spec:
+      containers:
+        - image: somkiat/gateway
+          name: gateway
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: gateway
+                  key: jwtSecret
+            - name: USER_WEB_SERVICE_HOST
+              value: "http://user-service"
+            - name: USER_WEB_SERVICE_PORT
+              value: "3000"
+            - name: PRODUCT_WEB_SERVICE_HOST
+              value: "http://product-service"
+            - name: PRODUCT_WEB_SERVICE_PORT
+              value: "3000"

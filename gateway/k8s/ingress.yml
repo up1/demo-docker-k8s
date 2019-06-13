@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: resources-ingress
+spec:
+  rules:
+  - http:
+      paths:
+      - backend:
+          serviceName: gateway
+          servicePort: 3000
+        path: /api/*
+      - backend:
+          serviceName: front-end
+          servicePort: 3000
+        path: /*
