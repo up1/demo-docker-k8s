@@ -16,8 +16,23 @@ $docker container run --rm -p 3000:3000 \
  user
 ```
 
-API Testing
+### Working with docker compose
+* Create database 
+* Seeding data to database (create tables)
+* Start user service
+
 ```
+// Create
+$docker-compose up -d
+
+// Delete
+$docker-compose down
+```
+
+### API Testing with Postman by using [newman](https://www.npmjs.com/package/newman) command
+```
+cd testing
+$newman run user-service.postman_collection.json
 ```
 
 
