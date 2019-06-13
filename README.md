@@ -31,7 +31,7 @@ $docker-compose down
 
 ### API Testing with Postman by using [newman](https://www.npmjs.com/package/newman) command
 ```
-cd testing
+$cd testing
 $newman run user-service.postman_collection.json
 ```
 
