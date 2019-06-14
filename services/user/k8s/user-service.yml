@@ -13,4 +13,4 @@ spec:
   selector:
     app: user
     type: web
-  type: ClusterIP
+  type: NodePort

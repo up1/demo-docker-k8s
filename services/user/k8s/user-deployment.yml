@@ -46,10 +46,5 @@ spec:
             secretKeyRef:
               name: user
               key: db_port
-        - name: TOKEN_SECRET
-          valueFrom:
-            secretKeyRef:
-              name: user
-              key: token_secret
         - name: PROCESS_TYPE
           value: web
