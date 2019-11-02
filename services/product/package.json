@@ -17,7 +17,7 @@
   "dependencies": {
     "faker": "4.1.0",
     "joi": "^13.3.0",
-    "knex": "^0.14.6",
+    "knex": "^0.19.5",
     "koa": "^2.5.1",
     "koa-bodyparser": "^4.2.1",
     "koa-compose": "4.0.0",
